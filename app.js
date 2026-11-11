@@ -1,6 +1,19 @@
 
 const editor = document.getElementById('code');
 const initialCode = editor.value;
+
+ // 入力したPythonコードをブラウザに自動保存
+const savedCode = localStorage.getItem('pyl_code');
+
+if (savedCode !== null) {
+  editor.value = savedCode;
+}
+
+// 入力するたびに保存
+editor.addEventListener('input', () => {
+  localStorage.setItem('pyl_code', editor.value);
+});
+
 const runBtn = document.getElementById('run');
 const message = document.getElementById('message');
 const textOutput = document.getElementById('text-output');
