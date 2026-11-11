@@ -21,6 +21,14 @@ const textOutput = document.getElementById('text-output');
 const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d');
 
+ // 描画する図形を一時的に保存する
+let drawingItems = [];
+
+// 図形を登録する
+window.addDrawingItem = function(item) {
+  drawingItems.push(item);
+};
+
 // Pythonから呼び出す図形描画処理
 
 window.drawPolygon = function(points, fillColor) {
