@@ -64,6 +64,35 @@ window.drawPolygon = function(points, fillColor) {
   ctx.fill();
 };
 
+ // 円を描く処理
+window.drawCircle = function(center, radius, fillColor) {
+  const margin = 30;
+
+  const cx = Number(center[0]);
+  const cy = Number(center[1]);
+  const r = Number(radius);
+
+  if (!Number.isFinite(cx) || !Number.isFinite(cy) ||
+      !Number.isFinite(r) || r <= 0) {
+    throw new Error("円の中心座標と半径を確認してください");
+  }
+
+  // 円全体が画面に収まる倍率
+  const scale = Math.min(
+    50,
+    (canvas.width - margin * 2) / Math.max(cx + r, 2 * r, 1),
+    (canvas.height - margin * 2) / Math.max(cy + r, 2 * r, 1)
+  );
+
+  const x = canvas.width / 2;
+  const y = canvas.height / 2;
+
+  ctx.beginPath();
+  ctx.arc(x, y, r * scale, 0, Math.PI * 2);
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+};
+
 
 let pyodide = null;
 
