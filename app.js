@@ -106,14 +106,17 @@ async function initPython() {
 
     // PythonからJavaScriptの描画機能を呼び出す
     
+
 pyodide.registerJsModule("drawing", {
-  drawPolygonJS: window.drawPolygon
+  drawPolygonJS: window.drawPolygon,
+  drawCircleJS: window.drawCircle
 });
+
 
 
     await pyodide.runPythonAsync(`
 
-from drawing import drawPolygonJS
+from drawing import drawPolygonJS, drawCircleJS
 
 from pyodide.ffi import to_js
 
@@ -126,6 +129,10 @@ def color(c):
 def draw(*points):
     coordinates = [list(p) for p in points]
     drawPolygonJS(to_js(coordinates), _current_color)
+    
+def circle(center, radius):
+    drawCircleJS(to_js(list(center)), radius, _current_color)
+
 `);
 
     runBtn.disabled = false;
