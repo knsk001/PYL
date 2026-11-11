@@ -78,6 +78,9 @@ def draw(*points):
 // Pythonコードの実行
 runBtn.addEventListener('click', async () => {
   if (!pyodide) return;
+  
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 
   runBtn.disabled = true;
   message.textContent = '実行中...';
