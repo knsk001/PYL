@@ -36,8 +36,28 @@ let pyodide = null;
 async function initPython() {
   message.textContent = 'Pythonを読み込んでいます...';
 
-  try {
-    pyodide = await loadPyodide();
+  
+try {
+  // PythonからJavaScriptの描画機能を呼び出す
+  pyodide.globals.set('drawPolygonJS', window.drawPolygon);
+
+  await pyodide.runPythonAsync(`
+from js import drawPolygonJS
+from pyodide.ffi import to_js
+
+_current_color = "#000000"
+
+def color(c):
+    global _current_color
+    _current_color = c
+
+def draw(*points):
+    coordinates = [list(p) for p in points]
+    drawPolygonJS(to_js(coordinates), _current_color)
+`);
+
+  await pyodide.runPythonAsync(editor.value);
+
     runBtn.disabled = false;
     runBtn.textContent = '▶ 実行';
     message.textContent = 'Pythonの準備ができました。';
