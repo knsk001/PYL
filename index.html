@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pythonプログラミング学習</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>Pythonプログラミング学習</h1><span>課題 1 / 6</span></header>
+<main>
+<section class="task"><h2>課題① 三角形を描こう</h2><p>3つの頂点を座標で指定し、RGBの16進数表記で色を設定して三角形を描きなさい。</p></section>
+<div class="workspace">
+<section class="panel"><h2>Pythonコード入力</h2><textarea id="code" spellcheck="false" aria-label="Pythonコード"># 三角形の3つの頂点
+A = (1, 2)
+B = (7, 2)
+C = (4, 6)
+
+# RGBを16進数で指定
+R = "FF"
+G = "80"
+B = "00"
+
+# 色コードを作成
+iro = "#" + R + G + B
+
+color(iro)
+draw(A, B, C)</textarea></section>
+<section class="panel"><h2>実行結果（図形・表・グラフ・文字）</h2><div id="output" class="output-wrap" aria-label="実行結果"><div id="text-output" class="result-section" hidden></div><div id="table-output" class="result-section" hidden></div><div id="canvas-output" class="result-section"><canvas id="preview" width="600" height="450" aria-label="図形・グラフプレビュー"></canvas></div></div><p class="hint">図形・表・グラフ・文字の表示領域を用意しました。実行機能は次の段階で追加します。</p></section>
+</div>
+<div class="actions"><button id="run" disabled>▶ 実行（準備中）</button><button id="reset" type="button">リセット</button><button id="next" disabled>次の課題（準備中）</button></div>
+<p id="message" role="status">共通プレビューの外枠が完成しました。</p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
