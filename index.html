@@ -45,20 +45,16 @@
 
 <div class="workspace">
 <section class="panel"><h2>Pythonコード入力</h2><textarea id="code" spellcheck="false" aria-label="Pythonコード"># 直線を引く
-T1 = (1, 2)
-T2 = (7, 2)
-T3 = (4, 6)
-
+line((1, 2), (8, 6))
+# 三角形を描く(反時計)
+draw((1, 1), (7, 1), (4, 6))
+# 四角形を描く(反時計)
+draw((1, 1), (7, 1), (7, 5), (1, 5))
+# 円
+circle((5, 5), 3)
 # RGBを16進数で指定
-R = "FF"
-G = "80"
-B = "00"
-
-# 色コードを作成
-iro = "#" + R + G + B
-
-color(iro)
-draw(T1, T2, T3)</textarea></section>
+color("#FF8000")
+</textarea></section>
 <section class="panel"><h2>実行結果（図形・表・グラフ・文字）</h2><div id="output" class="output-wrap" aria-label="実行結果"><div id="text-output" class="result-section" hidden></div><div id="table-output" class="result-section" hidden></div><div id="canvas-output" class="result-section"><canvas id="preview" width="600" height="450" aria-label="図形・グラフプレビュー"></canvas></div></div><p class="hint">図形・表・グラフ・文字の表示領域を用意しました。実行機能は次の段階で追加します。</p></section>
 </div>
 
