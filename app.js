@@ -103,6 +103,11 @@ def draw(*points):
     runBtn.textContent = '▶ 実行';
     message.textContent = 'Pythonの準備ができました。';
 
+ // 保存されたコードがあれば、再読み込み時に自動実行
+if (savedCode !== null && savedCode.trim() !== '') {
+  runBtn.click();
+}
+
   } catch (error) {
     message.textContent = 'Pythonの読み込みに失敗しました。';
     console.error(error);
