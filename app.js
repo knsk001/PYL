@@ -9,15 +9,36 @@ const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d');
 
 // Pythonから呼び出す図形描画処理
+
 window.drawPolygon = function(points, fillColor) {
-  const scale = 50;
+  const margin = 30;
+
+  // 座標の最大値・最小値を調べる
+  const xs = points.map(p => p[0]);
+  const ys = points.map(p => p[1]);
+
+  const minX = Math.min(...xs, 0);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys, 0);
+  const maxY = Math.max(...ys);
+
+  // 図形が画面に収まる倍率を求める
+  const rangeX = Math.max(maxX - minX, 1);
+  const rangeY = Math.max(maxY - minY, 1);
+
+  const scale = Math.min(
+    (canvas.width - margin * 2) / rangeX,
+    (canvas.height - margin * 2) / rangeY,
+    50
+  );
 
   ctx.fillStyle = fillColor;
   ctx.beginPath();
 
   points.forEach((point, index) => {
-    const x = point[0] * scale;
-    const y = canvas.height - point[1] * scale;
+    const x = margin + (point[0] - minX) * scale;
+    const y = canvas.height - margin
+            - (point[1] - minY) * scale;
 
     if (index === 0) {
       ctx.moveTo(x, y);
@@ -29,6 +50,7 @@ window.drawPolygon = function(points, fillColor) {
   ctx.closePath();
   ctx.fill();
 };
+
 
 let pyodide = null;
 
