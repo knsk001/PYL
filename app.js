@@ -41,7 +41,11 @@ async function initPython() {
     pyodide = await loadPyodide();
 
     // PythonからJavaScriptの描画機能を呼び出す
-    pyodide.globals.set('drawPolygonJS', window.drawPolygon);
+    
+pyodide.registerJsModule("drawing", {
+  drawPolygonJS: window.drawPolygon
+});
+
 
     await pyodide.runPythonAsync(`
 from js import drawPolygonJS
