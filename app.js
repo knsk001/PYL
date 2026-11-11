@@ -93,6 +93,42 @@ window.drawCircle = function(center, radius, fillColor) {
   ctx.fill();
 };
 
+ // 2点を結ぶ直線（線分）を描く
+window.drawLine = function(start, end, lineColor, width = 2) {
+  const margin = 30;
+
+  const x1 = Number(start[0]);
+  const y1 = Number(start[1]);
+  const x2 = Number(end[0]);
+  const y2 = Number(end[1]);
+
+  // 描画領域に収まる倍率を計算
+  const minX = Math.min(x1, x2, 0);
+  const maxX = Math.max(x1, x2);
+  const minY = Math.min(y1, y2, 0);
+  const maxY = Math.max(y1, y2);
+
+  const scale = Math.min(
+    50,
+    (canvas.width - margin * 2) / Math.max(maxX - minX, 1),
+    (canvas.height - margin * 2) / Math.max(maxY - minY, 1)
+  );
+
+  ctx.beginPath();
+  ctx.moveTo(
+    margin + (x1 - minX) * scale,
+    canvas.height - margin - (y1 - minY) * scale
+  );
+  ctx.lineTo(
+    margin + (x2 - minX) * scale,
+    canvas.height - margin - (y2 - minY) * scale
+  );
+
+  ctx.strokeStyle = lineColor;
+  ctx.lineWidth = width;
+  ctx.stroke();
+};
+
 
 let pyodide = null;
 
