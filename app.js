@@ -79,7 +79,7 @@ def draw(*points):
 runBtn.addEventListener('click', async () => {
   if (!pyodide) return;
  
-ctx.clearRect(0, 0, canvas.width, canvas.height);
+
  
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
