@@ -145,7 +145,8 @@ async function initPython() {
 
 pyodide.registerJsModule("drawing", {
   drawPolygonJS: window.drawPolygon,
-  drawCircleJS: window.drawCircle
+  drawCircleJS: window.drawCircle,
+  drawLineJS: window.drawLine
 });
 
 
