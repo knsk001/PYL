@@ -48,7 +48,9 @@ pyodide.registerJsModule("drawing", {
 
 
     await pyodide.runPythonAsync(`
-from js import drawPolygonJS
+
+from drawing import drawPolygonJS
+
 from pyodide.ffi import to_js
 
 _current_color = "#000000"
