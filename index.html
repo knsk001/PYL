@@ -10,28 +10,41 @@
 <header><h1>Pythonプログラミング学習</h1><span>課題 1 / 6</span></header>
 <main>
 
+
 <section class="task">
   <h2>図形を描こう</h2>
   <p>座標と色を指定して、さまざまな図形を描いてみよう。</p>
 
-  <p><strong>① 直線</strong>：始点と終点を指定する</p>
-  <code>line((1, 2), (8, 6))</code>
-
-  <p><strong>② 三角形</strong>：3つの頂点を指定する</p>
-  <code>draw((1, 1), (7, 1), (4, 6))</code>
-
-  <p><strong>③ 四角形</strong>：4つの頂点を指定する</p>
-  <code>draw((1, 1), (7, 1), (7, 5), (1, 5))</code>
-
-  <p><strong>④ 円</strong>：中心座標と半径を指定する</p>
-  <code>circle((5, 5), 3)</code>
-
-  <p><strong>色の指定</strong>：RGBの16進数で指定する</p>
-  <code>color("#FF8000")</code>
+  <table class="shape-guide">
+    <tr>
+      <th>図形</th>
+      <th>Pythonの命令</th>
+    </tr>
+    <tr>
+      <td>直線</td>
+      <td><code>line((1, 2), (8, 6))</code></td>
+    </tr>
+    <tr>
+      <td>三角形</td>
+      <td><code>draw((1, 1), (7, 1), (4, 6))</code></td>
+    </tr>
+    <tr>
+      <td>四角形</td>
+      <td><code>draw((1, 1), (7, 1), (7, 5), (1, 5))</code></td>
+    </tr>
+    <tr>
+      <td>円</td>
+      <td><code>circle((5, 5), 3)</code></td>
+    </tr>
+    <tr>
+      <td>色</td>
+      <td><code>color("#FF8000")</code></td>
+    </tr>
+  </table>
 </section>
 
 <div class="workspace">
-<section class="panel"><h2>Pythonコード入力</h2><textarea id="code" spellcheck="false" aria-label="Pythonコード"># 三角形の3つの頂点
+<section class="panel"><h2>Pythonコード入力</h2><textarea id="code" spellcheck="false" aria-label="Pythonコード"># 直線を引く
 T1 = (1, 2)
 T2 = (7, 2)
 T3 = (4, 6)
