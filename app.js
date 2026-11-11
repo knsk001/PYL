@@ -31,111 +31,148 @@ window.addDrawingItem = function(item) {
 
 // Pythonから呼び出す図形描画処理
 
+
 window.drawPolygon = function(points, fillColor) {
-  const margin = 30;
-
-  // 座標の最大値・最小値を調べる
-  const xs = points.map(p => p[0]);
-  const ys = points.map(p => p[1]);
-
-  const minX = Math.min(...xs, 0);
-  const maxX = Math.max(...xs);
-  const minY = Math.min(...ys, 0);
-  const maxY = Math.max(...ys);
-
-  // 図形が画面に収まる倍率を求める
-  const rangeX = Math.max(maxX - minX, 1);
-  const rangeY = Math.max(maxY - minY, 1);
-
-  const scale = Math.min(
-    (canvas.width - margin * 2) / rangeX,
-    (canvas.height - margin * 2) / rangeY,
-    50
+  // Pythonから渡された座標を通常の配列に変換
+  const coordinates = Array.from(
+    points,
+    p => [Number(p[0]), Number(p[1])]
   );
 
-  ctx.fillStyle = fillColor;
-  ctx.beginPath();
-
-  points.forEach((point, index) => {
-    const x = margin + (point[0] - minX) * scale;
-    const y = canvas.height - margin
-            - (point[1] - minY) * scale;
-
-    if (index === 0) {
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
-    }
+  // 多角形の情報を保存
+  window.addDrawingItem({
+    type: "polygon",
+    points: coordinates,
+    color: fillColor
   });
-
-  ctx.closePath();
-  ctx.fill();
 };
 
- // 円を描く処理
-window.drawCircle = function(center, radius, fillColor) {
-  const margin = 30;
 
+ // 円を描く処理
+
+window.drawCircle = function(center, radius, fillColor) {
   const cx = Number(center[0]);
   const cy = Number(center[1]);
   const r = Number(radius);
 
-  if (!Number.isFinite(cx) || !Number.isFinite(cy) ||
+  // 座標と半径を確認
+  if (!Number.isFinite(cx) ||
+      !Number.isFinite(cy) ||
       !Number.isFinite(r) || r <= 0) {
     throw new Error("円の中心座標と半径を確認してください");
   }
 
-  // 円全体が画面に収まる倍率
-  const scale = Math.min(
-    50,
-    (canvas.width - margin * 2) / Math.max(cx + r, 2 * r, 1),
-    (canvas.height - margin * 2) / Math.max(cy + r, 2 * r, 1)
-  );
-
-  const x = canvas.width / 2;
-  const y = canvas.height / 2;
-
-  ctx.beginPath();
-  ctx.arc(x, y, r * scale, 0, Math.PI * 2);
-  ctx.fillStyle = fillColor;
-  ctx.fill();
+  // 円の情報を保存
+  window.addDrawingItem({
+    type: "circle",
+    center: [cx, cy],
+    radius: r,
+    color: fillColor
+  });
 };
 
- // 2点を結ぶ直線（線分）を描く
-window.drawLine = function(start, end, lineColor, width = 2) {
-  const margin = 30;
 
+ // 2点を結ぶ直線（線分）を描く
+
+window.drawLine = function(start, end, lineColor, width = 2) {
   const x1 = Number(start[0]);
   const y1 = Number(start[1]);
   const x2 = Number(end[0]);
   const y2 = Number(end[1]);
 
-  // 描画領域に収まる倍率を計算
-  const minX = Math.min(x1, x2, 0);
-  const maxX = Math.max(x1, x2);
-  const minY = Math.min(y1, y2, 0);
-  const maxY = Math.max(y1, y2);
+  // 座標と線の太さを確認
+  if (![x1, y1, x2, y2].every(Number.isFinite) ||
+      !Number.isFinite(Number(width)) || Number(width) <= 0) {
+    throw new Error("直線の座標と太さを確認してください");
+  }
 
+  // 直線の情報を保存
+  window.addDrawingItem({
+    type: "line",
+    start: [x1, y1],
+    end: [x2, y2],
+    color: lineColor,
+    width: Number(width)
+  });
+};
+
+ // 保存したすべての図形を共通座標で描画
+window.renderDrawings = function() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (drawingItems.length === 0) return;
+
+  const xs = [];
+  const ys = [];
+
+  // 全図形の座標範囲を調べる
+  drawingItems.forEach(item => {
+    if (item.type === "polygon") {
+      item.points.forEach(p => {
+        xs.push(p[0]);
+        ys.push(p[1]);
+      });
+    } else if (item.type === "circle") {
+      xs.push(item.center[0] - item.radius,
+              item.center[0] + item.radius);
+      ys.push(item.center[1] - item.radius,
+              item.center[1] + item.radius);
+    } else if (item.type === "line") {
+      xs.push(item.start[0], item.end[0]);
+      ys.push(item.start[1], item.end[1]);
+    }
+  });
+
+  const minX = Math.min(...xs, 0);
+  const maxX = Math.max(...xs, 0);
+  const minY = Math.min(...ys, 0);
+  const maxY = Math.max(...ys, 0);
+
+  const margin = 30;
   const scale = Math.min(
     50,
     (canvas.width - margin * 2) / Math.max(maxX - minX, 1),
     (canvas.height - margin * 2) / Math.max(maxY - minY, 1)
   );
 
-  ctx.beginPath();
-  ctx.moveTo(
-    margin + (x1 - minX) * scale,
-    canvas.height - margin - (y1 - minY) * scale
-  );
-  ctx.lineTo(
-    margin + (x2 - minX) * scale,
-    canvas.height - margin - (y2 - minY) * scale
-  );
+  const X = x => margin + (x - minX) * scale;
+  const Y = y => canvas.height - margin - (y - minY) * scale;
 
-  ctx.strokeStyle = lineColor;
-  ctx.lineWidth = width;
-  ctx.stroke();
+  // 登録順に描画する
+  drawingItems.forEach(item => {
+    if (item.type === "polygon") {
+      ctx.beginPath();
+      item.points.forEach((p, i) => {
+        if (i === 0) ctx.moveTo(X(p[0]), Y(p[1]));
+        else ctx.lineTo(X(p[0]), Y(p[1]));
+      });
+      ctx.closePath();
+      ctx.fillStyle = item.color;
+      ctx.fill();
+
+    } else if (item.type === "circle") {
+      ctx.beginPath();
+      ctx.arc(
+        X(item.center[0]),
+        Y(item.center[1]),
+        item.radius * scale,
+        0,
+        Math.PI * 2
+      );
+      ctx.fillStyle = item.color;
+      ctx.fill();
+
+    } else if (item.type === "line") {
+      ctx.beginPath();
+      ctx.moveTo(X(item.start[0]), Y(item.start[1]));
+      ctx.lineTo(X(item.end[0]), Y(item.end[1]));
+      ctx.strokeStyle = item.color;
+      ctx.lineWidth = item.width;
+      ctx.stroke();
+    }
+  });
 };
+
 
 
 let pyodide = null;
@@ -226,10 +263,18 @@ ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
   });
 
-  try {
-    await pyodide.runPythonAsync(editor.value);
 
-    textOutput.hidden = false;
+try {
+  // 今回の実行で描く図形だけを記録
+  drawingItems = [];
+
+  await pyodide.runPythonAsync(editor.value);
+
+  // 全図形を共通座標で描画
+  window.renderDrawings();
+
+  textOutput.hidden = false;
+
     textOutput.textContent =
       output || '実行が完了しました。';
 
