@@ -33,15 +33,17 @@ window.drawPolygon = function(points, fillColor) {
 let pyodide = null;
 
 // Pythonの読み込み
+
 async function initPython() {
   message.textContent = 'Pythonを読み込んでいます...';
 
-  
-try {
-  // PythonからJavaScriptの描画機能を呼び出す
-  pyodide.globals.set('drawPolygonJS', window.drawPolygon);
+  try {
+    pyodide = await loadPyodide();
 
-  await pyodide.runPythonAsync(`
+    // PythonからJavaScriptの描画機能を呼び出す
+    pyodide.globals.set('drawPolygonJS', window.drawPolygon);
+
+    await pyodide.runPythonAsync(`
 from js import drawPolygonJS
 from pyodide.ffi import to_js
 
@@ -56,16 +58,16 @@ def draw(*points):
     drawPolygonJS(to_js(coordinates), _current_color)
 `);
 
-  await pyodide.runPythonAsync(editor.value);
-
     runBtn.disabled = false;
     runBtn.textContent = '▶ 実行';
     message.textContent = 'Pythonの準備ができました。';
+
   } catch (error) {
     message.textContent = 'Pythonの読み込みに失敗しました。';
     console.error(error);
   }
 }
+
 
 // Pythonコードの実行
 runBtn.addEventListener('click', async () => {
