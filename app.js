@@ -268,7 +268,10 @@ try {
   // 今回の実行で描く図形だけを記録
   drawingItems = [];
 
-  await pyodide.runPythonAsync(editor.value);
+  
+await pyodide.runPythonAsync('_current_color = "#000000"');
+await pyodide.runPythonAsync(editor.value);
+
 
   // 全図形を共通座標で描画
   window.renderDrawings();
