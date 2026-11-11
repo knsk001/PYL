@@ -153,7 +153,7 @@ pyodide.registerJsModule("drawing", {
 
     await pyodide.runPythonAsync(`
 
-from drawing import drawPolygonJS, drawCircleJS
+from drawing import drawPolygonJS, drawCircleJS, drawLineJS
 
 from pyodide.ffi import to_js
 
@@ -169,6 +169,16 @@ def draw(*points):
     
 def circle(center, radius):
     drawCircleJS(to_js(list(center)), radius, _current_color)
+
+
+def line(start, end, width=2):
+    drawLineJS(
+        to_js(list(start)),
+        to_js(list(end)),
+        _current_color,
+        width
+    )
+
 
 `);
 
