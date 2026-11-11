@@ -5,6 +5,31 @@ const runBtn = document.getElementById('run');
 const message = document.getElementById('message');
 const textOutput = document.getElementById('text-output');
 
+const canvas = document.getElementById('preview');
+const ctx = canvas.getContext('2d');
+
+// Pythonから呼び出す図形描画処理
+window.drawPolygon = function(points, fillColor) {
+  const scale = 50;
+
+  ctx.fillStyle = fillColor;
+  ctx.beginPath();
+
+  points.forEach((point, index) => {
+    const x = point[0] * scale;
+    const y = canvas.height - point[1] * scale;
+
+    if (index === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  });
+
+  ctx.closePath();
+  ctx.fill();
+};
+
 let pyodide = null;
 
 // Pythonの読み込み
