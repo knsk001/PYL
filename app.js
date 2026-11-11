@@ -62,4 +62,19 @@ document.getElementById('reset').addEventListener('click', () => {
   message.textContent = '入力内容を初期状態に戻しました。';
 });
 
+ // 全部消す
+document.getElementById('clear').addEventListener('click', () => {
+  editor.value = '';
+  textOutput.textContent = '';
+  textOutput.hidden = true;
+
+  const canvas = document.getElementById('preview');
+  canvas.getContext('2d').clearRect(
+    0, 0, canvas.width, canvas.height
+  );
+
+  message.textContent = '入力内容をすべて消しました。';
+  editor.focus();
+});
+
 initPython();
