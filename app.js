@@ -43,6 +43,51 @@ async function loadTask(taskNumber) {
   }
 }
 
+ // 課題JSONの内容を画面に表示する
+function displayTask(task) {
+  document.querySelector('header span').textContent =
+    `課題 ${task.id} / 6`;
+
+  const taskSection = document.querySelector('.task');
+  taskSection.replaceChildren();
+
+  const title = document.createElement('h2');
+  title.textContent = task.title;
+
+  const description = document.createElement('p');
+  description.textContent = task.description;
+
+  taskSection.append(title, description);
+
+  if (task.guide && task.guide.length > 0) {
+    const table = document.createElement('table');
+    table.className = 'shape-guide';
+
+    task.guide.forEach(item => {
+      const tr = document.createElement('tr');
+      const td1 = document.createElement('td');
+      const td2 = document.createElement('td');
+
+      td1.textContent = item.name;
+      td2.textContent = item.code;
+
+      tr.append(td1, td2);
+      table.appendChild(tr);
+    });
+
+    taskSection.appendChild(table);
+  }
+
+  editor.value = task.code;
+
+  drawingItems = [];
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  textOutput.textContent = '';
+  textOutput.hidden = true;
+
+  message.textContent = `課題${task.id}を表示しました。`;
+}
+
  // 描画する図形を一時的に保存する
 let drawingItems = [];
 
