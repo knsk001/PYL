@@ -255,14 +255,18 @@ async function initPython() {
     // Pythonのinput()で番号を入力できるようにする
     
     // Pythonのinput()をブラウザの入力画面に接続
-    pyodide.setStdin({
-      stdin: () => {
-        const value = window.prompt(
-          "処理番号を入力してください（0～3）"
-        );
-        return value === null ? "\n" : value + "\n";
-      }
-    });
+    
+    // Pythonのinput()をブラウザの入力画面に接続
+    pyodide.globals.set(
+      "browser_input",
+      (message) => window.prompt(message) ?? ""
+    );
+
+    await pyodide.runPythonAsync(`
+import builtins
+builtins.input = browser_input
+`);
+
 
 
     // PythonからJavaScriptの描画機能を呼び出す
