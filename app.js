@@ -204,6 +204,20 @@ from pyodide.ffi import to_js
 
 _current_color = "#000000"
 
+def invert_color(iro):
+    r = 255 - int(iro[1:3], 16)
+    g = 255 - int(iro[3:5], 16)
+    b = 255 - int(iro[5:7], 16)
+    return f"#{r:02X}{g:02X}{b:02X}"
+
+def show_colors(original, changed):
+    color(original)
+    draw((1, 1), (4, 1), (4, 4), (1, 4))
+
+    color(changed)
+    draw((6, 1), (9, 1), (9, 4), (6, 4))
+    
+
 def color(c):
     global _current_color
     _current_color = c
