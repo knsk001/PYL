@@ -55,6 +55,48 @@ circle((5, 5), 3)
 # RGBを16進数で指定
 color("#0000FF")
 </textarea></section>
+  
+<textarea id="task2-code" hidden>
+# 課題② RGBの値を交換しよう
+
+iro = "#FF8000"
+
+r = iro[1:3]
+g = iro[3:5]
+b = iro[5:7]
+
+n = int(input("処理番号（0～3）："))
+
+if n == 0:
+    # 色を反転する
+    new_iro = invert_color(iro)
+
+elif n == 1:
+    # 赤と緑を交換（お手本）
+    tmp = r
+    r = g
+    g = tmp
+    new_iro = "#" + r + g + b
+
+elif n == 2:
+    # 緑と青を交換
+    # ここを完成させよう
+    new_iro = "#" + r + g + b
+
+elif n == 3:
+    # 赤と青を交換
+    # ここを完成させよう
+    new_iro = "#" + r + g + b
+
+else:
+    new_iro = iro
+
+print("元の色：", iro)
+print("変更後：", new_iro)
+
+show_colors(iro, new_iro)
+</textarea>
+
 <section class="panel"><h2>実行結果（図形・表・グラフ・文字）</h2><div id="output" class="output-wrap" aria-label="実行結果"><div id="text-output" class="result-section" hidden></div><div id="table-output" class="result-section" hidden></div><div id="canvas-output" class="result-section"><canvas id="preview" width="600" height="450" aria-label="図形・グラフプレビュー"></canvas></div></div><p class="hint">図形・表・グラフ・文字の表示領域を用意しました。実行機能は次の段階で追加します。</p></section>
 </div>
 
