@@ -328,4 +328,35 @@ document.getElementById('clear').addEventListener('click', () => {
   editor.focus();
 });
 
+ // 課題①から課題②へ切り替える
+const nextBtn = document.getElementById('next');
+
+nextBtn.disabled = false;
+nextBtn.textContent = '次の課題へ';
+
+nextBtn.addEventListener('click', () => {
+  const task2 = document.getElementById('task2-code');
+
+  // 課題②のPythonコードを表示
+  editor.value = task2.value;
+  localStorage.setItem('pyl_code', editor.value);
+
+  // 課題のタイトルと説明を変更
+  document.querySelector('header span').textContent = '課題 2 / 6';
+  document.querySelector('.task').innerHTML = `
+    <h2>課題② RGBの値を交換しよう</h2>
+    <p>番号を入力し、RGBの値を入れ替えてみよう。</p>
+    <p>①を参考にして、②と③のプログラムを完成させよう。</p>
+  `;
+
+  // 実行結果を消す
+  drawingItems = [];
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  textOutput.textContent = '';
+  textOutput.hidden = true;
+
+  message.textContent = '課題②に切り替わりました。';
+  nextBtn.disabled = true;
+});
+
 initPython();
