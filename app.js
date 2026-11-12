@@ -21,6 +21,28 @@ const textOutput = document.getElementById('text-output');
 const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d');
 
+ // 課題JSONファイルを読み込む
+async function loadTask(taskNumber) {
+  try {
+    const response = await fetch(
+      `tasks/task${taskNumber}.json`
+    );
+
+    if (!response.ok) {
+      throw new Error("課題ファイルが見つかりません");
+    }
+
+    const task = await response.json();
+
+    return task;
+
+  } catch (error) {
+    console.error("課題の読み込みエラー:", error);
+    message.textContent = "課題の読み込みに失敗しました。";
+    return null;
+  }
+}
+
  // 描画する図形を一時的に保存する
 let drawingItems = [];
 
