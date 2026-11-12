@@ -1,0 +1,25 @@
+
+{
+  "id": 2,
+  "title": "RGBの値を交換しよう",
+  "description": "RGBの各値を入れ替えると、図形の色はどのように変わるだろうか。①のお手本を参考に、②と③のプログラムを完成させよう。",
+  "guide": [
+    {
+      "name": "⓪",
+      "code": "RGBの色を反転する（内部関数）"
+    },
+    {
+      "name": "①",
+      "code": "赤（R）と緑（G）を交換する（お手本）"
+    },
+    {
+      "name": "②",
+      "code": "緑（G）と青（B）を交換する"
+    },
+    {
+      "name": "③",
+      "code": "赤（R）と青（B）を交換する"
+    }
+  ],
+  "code": "# 課題② RGBの値を交換しよう\n\niro = \"#FF8000\"\n\nr = iro[1:3]\ng = iro[3:5]\nb = iro[5:7]\n\nn = int(input(\"処理番号（0～3）：\"))\n\nif n == 0:\n    new_iro = invert_color(iro)\n\nelif n == 1:\n    # 赤と緑を交換（お手本）\n    tmp = r\n    r = g\n    g = tmp\n    new_iro = \"#\" + r + g + b\n\nelif n == 2:\n    # 緑と青を交換\n    # ここにプログラムを入力\n    new_iro = \"#\" + r + g + b\n\nelif n == 3:\n    # 赤と青を交換\n    # ここにプログラムを入力\n    new_iro = \"#\" + r + g + b\n\nelse:\n    new_iro = iro\n\nprint(\"元の色：\", iro)\nprint(\"変更後：\", new_iro)\n\nshow_colors(iro, new_iro)"
+}
