@@ -333,10 +333,12 @@ def line(start, end, width=2):
     runBtn.textContent = '▶ 実行';
     message.textContent = 'Pythonの準備ができました。';
 
- // 保存されたコードがあれば、再読み込み時に自動実行
-if (savedCode !== null && savedCode.trim() !== '') {
+ 
+// Pythonの準備ができたら、表示中のサンプルを自動実行
+if (editor.value.trim() !== '') {
   runBtn.click();
 }
+
 
   } catch (error) {
     message.textContent = 'Pythonの読み込みに失敗しました。';
