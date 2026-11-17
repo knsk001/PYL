@@ -440,12 +440,14 @@ nextBtn.addEventListener('click', async () => {
   // 課題を画面に表示
   displayTask(task);
   currentTask = nextNumber;
-
+// 新しい課題のサンプルを自動実行
+runBtn.click();
+ 
   // 編集中のコードを保存
   localStorage.setItem('pyl_code', editor.value);
 
-  // 現在は課題②まで
-  nextBtn.disabled = currentTask >= 2;
+  // 現在は課題③まで
+  nextBtn.disabled = currentTask >= 3;
 });
 
 initPython();
