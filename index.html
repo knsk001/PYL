@@ -44,16 +44,26 @@
 </section>
 
 <div class="workspace">
-<section class="panel"><h2>Pythonコード入力</h2><textarea id="code" spellcheck="false" aria-label="Pythonコード"># 直線を引く
-line((1, 2), (8, 6))
-# 三角形を描く(反時計)
-draw((1, 1), (7, 1), (4, 6))
-# 四角形を描く(反時計)
-draw((1, 1), (7, 1), (7, 5), (1, 5))
-# 円
-circle((5, 5), 3)
-# RGBを16進数で指定
-color("#0000FF")
+<section class="panel"><h2>Pythonコード入力</h2><textarea id="code" spellcheck="false" aria-label="Pythonコード">
+# 課題① 関数と四則演算
+
+def tasu(a, b):
+    return a + b
+
+def hiku(a, b):
+    return a - b
+
+def kakeru(a, b):
+    return a * b
+
+def waru(a, b):
+    return a / b
+
+print(tasu(12, 4))
+print(hiku(12, 4))
+print(kakeru(12, 4))
+print(waru(12, 4))
+
 </textarea></section>
   
 <textarea id="task2-code" hidden>
