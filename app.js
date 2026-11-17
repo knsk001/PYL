@@ -3,11 +3,15 @@ const editor = document.getElementById('code');
 const initialCode = editor.value;
 
  // 入力したPythonコードをブラウザに自動保存
+
 const savedCode = localStorage.getItem('pyl_code');
 
+// 以前保存したコードより、課題①のサンプルを優先する
+// 既存の保存データは削除しない
 if (savedCode !== null) {
-  editor.value = savedCode;
+  console.log("保存済みコードがあります");
 }
+
 
 // 入力するたびに保存
 editor.addEventListener('input', () => {
