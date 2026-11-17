@@ -29,8 +29,9 @@ const ctx = canvas.getContext('2d');
 async function loadTask(taskNumber) {
   try {
     const response = await fetch(
-      `tasks/task${taskNumber}.json`
-    );
+  `tasks/task${taskNumber}.json`,
+  { cache: "no-store" }
+);
 
     if (!response.ok) {
       throw new Error("課題ファイルが見つかりません");
