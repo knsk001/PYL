@@ -21,5 +21,7 @@
       "code": "sen(a, b, futosa, iro)"
     }
   ],
-  "code": "# 課題② 引数を使って図形を描こう\n\ndef sankaku(a, b, c, iro):\n    color(iro)\n    draw(a, b, c)\n\ndef shikaku(a, b, c, d, iro):\n    color(iro)\n    draw(a, b, c, d)\n\ndef maru(chushin, hankei, iro):\n    color(iro)\n    circle(chushin, hankei)\n\ndef sen(a, b, futosa, iro):\n    color(iro)\n    line(a, b, futosa)\n\n# 関数を呼び出す\nshikaku((2,1),(8,1),(8,5),(2,5),\"#0080FF\")\nsankaku((1,1),(7,1),(4,6),\"#FF8000\")\nmaru((5,5),2,\"#FFFF00\")\nsen((1,1),(8,6),5,\"#000000\")"
+  
+"code": "# 課題② 引数を使って図形を描こう\n\ndef sankaku(a, b, c, iro):\n    color(iro)\n    draw(a, b, c)\n\ndef shikaku(a, b, c, d, iro):\n    color(iro)\n    draw(a, b, c, d)\n\ndef maru(chushin, hankei, iro):\n    color(iro)\n    circle(chushin, hankei)\n\ndef sen(a, b, futosa, iro):\n    color(iro)\n    line(a, b, futosa)\n\n# 関数を呼び出す\nshikaku((2,1),(8,1),(8,5),(2,5),\"#0080FF\")\n#sankaku((1,1),(7,1),(4,6),\"#FF8000\")\n#maru((5,5),2,\"#FFFF00\")\n#sen((1,1),(8,6),5,\"#000000\")"
+
 }
