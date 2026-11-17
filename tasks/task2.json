@@ -1,25 +1,25 @@
 
 {
   "id": 2,
-  "title": "図形を描こう（順次構造）",
-  "description": "関数を呼び出す順番を考えて、家の絵を完成させよう。図形は描いた順番に重なります。",
+  "title": "引数を使って図形を描こう",
+  "description": "defで図形を描く関数を定義し、座標・色・太さを引数で受け渡そう。関数を呼び出す順番による図形の重なりも確認しよう。",
   "guide": [
     {
-      "name": "関数の定義",
-      "code": "def kabe():"
-    },
-    {
-      "name": "関数の呼び出し",
-      "code": "kabe()"
-    },
-    {
-      "name": "色の指定",
-      "code": "color(\"#80C0FF\")"
+      "name": "三角形",
+      "code": "sankaku(a, b, c, iro)"
     },
     {
       "name": "四角形",
-      "code": "draw((2,1),(8,1),(8,6),(2,6))"
+      "code": "shikaku(a, b, c, d, iro)"
+    },
+    {
+      "name": "円",
+      "code": "maru(chushin, hankei, iro)"
+    },
+    {
+      "name": "直線",
+      "code": "sen(a, b, futosa, iro)"
     }
   ],
-  "code": "# 課題② 図形を描こう\n# 関数を呼び出す順番を考えよう\n\ndef kabe():\n    color(\"#80C0FF\")\n    draw((2,1),(8,1),(8,6),(2,6))\n\ndef yane():\n    color(\"#FF8000\")\n    draw((1,6),(5,9),(9,6))\n\ndef doa():\n    color(\"#804000\")\n    draw((4,1),(6,1),(6,4),(4,4))\n\n# 呼び出す順番を変えてみよう\nkabe()\nyane()\ndoa()"
+  "code": "# 課題② 引数を使って図形を描こう\n\ndef sankaku(a, b, c, iro):\n    color(iro)\n    draw(a, b, c)\n\ndef shikaku(a, b, c, d, iro):\n    color(iro)\n    draw(a, b, c, d)\n\ndef maru(chushin, hankei, iro):\n    color(iro)\n    circle(chushin, hankei)\n\ndef sen(a, b, futosa, iro):\n    color(iro)\n    line(a, b, futosa)\n\n# 関数を呼び出す\nshikaku((2,1),(8,1),(8,5),(2,5),\"#0080FF\")\nsankaku((1,1),(7,1),(4,6),\"#FF8000\")\nmaru((5,5),2,\"#FFFF00\")\nsen((1,1),(8,6),5,\"#000000\")"
 }
