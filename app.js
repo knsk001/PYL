@@ -397,12 +397,20 @@ await pyodide.runPythonAsync(editor.value);
 });
 
 // リセット
-document.getElementById('reset').addEventListener('click', () => {
-  editor.value = initialCode;
+document.getElementById('reset').addEventListener('click', async () => {
+  if (currentTask === 1) {
+    editor.value = initialCode;
+  } else {
+    const task = await loadTask(currentTask);
+    if (!task) return;
+    editor.value = task.code;
+  }
+
   textOutput.textContent = '';
   textOutput.hidden = true;
-  message.textContent = '入力内容を初期状態に戻しました。';
+  message.textContent = '現在の課題の初期コードに戻しました。';
 });
+
 
  // 全部消す
 document.getElementById('clear').addEventListener('click', () => {
