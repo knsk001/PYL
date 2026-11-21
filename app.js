@@ -425,10 +425,29 @@ let currentTask = 1;
 
 // 次の課題ボタン
 const nextBtn = document.getElementById('next');
+const prevBtn = document.getElementById('prev');
 
 nextBtn.disabled = false;
 nextBtn.textContent = '次の課題へ';
 
+// 前の課題に戻る
+prevBtn.addEventListener('click', async () => {
+  if (currentTask <= 1) return;
+
+  const previousNumber = currentTask - 1;
+  const task = await loadTask(previousNumber);
+
+  if (!task) return;
+
+  displayTask(task);
+  currentTask = previousNumber;
+
+  prevBtn.disabled = currentTask <= 1;
+  nextBtn.disabled = false;
+
+  localStorage.setItem('pyl_code', editor.value);
+  runBtn.click();
+});
 // 次の課題へ進む
 nextBtn.addEventListener('click', async () => {
   const nextNumber = currentTask + 1;
@@ -441,6 +460,7 @@ nextBtn.addEventListener('click', async () => {
   // 課題を画面に表示
   displayTask(task);
   currentTask = nextNumber;
+ prevBtn.disabled = currentTask <= 1;
 // 新しい課題のサンプルを自動実行
 runBtn.click();
  
