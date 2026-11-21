@@ -324,18 +324,21 @@ builtins.input = browser_input
 
     // PythonからJavaScriptの描画機能を呼び出す
     
-
 pyodide.registerJsModule("drawing", {
   drawPolygonJS: window.drawPolygon,
   drawCircleJS: window.drawCircle,
+  drawCircleLineJS: window.drawCircleLine,
   drawLineJS: window.drawLine
 });
 
 
 
+
     await pyodide.runPythonAsync(`
 
-from drawing import drawPolygonJS, drawCircleJS, drawLineJS
+
+from drawing import drawPolygonJS, drawCircleJS, drawCircleLineJS, drawLineJS
+
 
 from pyodide.ffi import to_js
 
@@ -365,6 +368,9 @@ def draw(*points):
     
 def circle(center, radius):
     drawCircleJS(to_js(list(center)), radius, _current_color)
+
+def circle_line(center, radius):
+    drawCircleLineJS(to_js(list(center)), radius, _current_color)
 
 
 def line(start, end, width=2):
