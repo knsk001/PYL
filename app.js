@@ -19,6 +19,97 @@ editor.addEventListener('input', () => {
 });
 
 const runBtn = document.getElementById('run');
+
+const autoPlayBtn = document.getElementById('auto-play');
+const stepPlayBtn = document.getElementById('step-play');
+const playResetBtn = document.getElementById('play-reset');
+
+
+ // 再生機能の管理
+let playbackItems = [];
+let playbackIndex = 0;
+let playbackTimer = null;
+let playbackRunning = false;
+
+
+function resetPlayback() {
+  // 自動再生を停止する
+  if (playbackTimer !== null) {
+    clearInterval(playbackTimer);
+    playbackTimer = null;
+  }
+
+  playbackRunning = false;
+  playbackIndex = 0;
+
+  // 描画画面を消去する
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // ボタンの状態を更新する
+  autoPlayBtn.disabled = playbackItems.length === 0;
+  stepPlayBtn.disabled = playbackItems.length === 0;
+  playResetBtn.disabled = playbackItems.length === 0;
+}
+
+function stepPlayback() {
+  // すべて表示済みなら終了
+  if (playbackIndex >= playbackItems.length) return;
+
+  // 次に表示する図形を取得
+  const item = playbackItems[playbackIndex];
+
+  // 表示対象を1個増やす
+  playbackIndex++;
+
+  // 表示済みの図形を描画する
+  const allItems = drawingItems;
+  drawingItems = playbackItems.slice(0, playbackIndex);
+
+  window.renderDrawings();
+
+  // 元の図形データに戻す
+  drawingItems = allItems;
+
+  // ボタンの状態を更新
+  
+  const finished = playbackIndex >= playbackItems.length;
+  stepPlayBtn.disabled = finished || playbackRunning;
+  autoPlayBtn.disabled = finished || playbackRunning;
+
+
+  message.textContent =
+    `繰り返し ${playbackIndex} / ${playbackItems.length} 回`;
+}
+
+stepPlayBtn.addEventListener('click', () => {
+  stepPlayback();
+});
+
+
+autoPlayBtn.addEventListener('click', () => {
+  if (playbackRunning) return;
+  if (playbackIndex >= playbackItems.length) return;
+
+  playbackRunning = true;
+  autoPlayBtn.disabled = true;
+  stepPlayBtn.disabled = true;
+
+  playbackTimer = setInterval(() => {
+    stepPlayback();
+
+    if (playbackIndex >= playbackItems.length) {
+      clearInterval(playbackTimer);
+      playbackTimer = null;
+      playbackRunning = false;
+    }
+  }, 1000);
+});
+
+playResetBtn.addEventListener('click', () => {
+  resetPlayback();
+  message.textContent = '最初から再生できます。';
+});
+
 const message = document.getElementById('message');
 const textOutput = document.getElementById('text-output');
 
@@ -429,11 +520,21 @@ try {
 
   
 await pyodide.runPythonAsync('_current_color = "#000000"');
+
 await pyodide.runPythonAsync(editor.value);
 
+// 描画した図形を再生用に保存
+playbackItems = [...drawingItems];
+playbackIndex = 0;
 
-  // 全図形を共通座標で描画
-  window.renderDrawings();
+// 再生ボタンを有効にする
+autoPlayBtn.disabled = playbackItems.length === 0;
+stepPlayBtn.disabled = playbackItems.length === 0;
+playResetBtn.disabled = playbackItems.length === 0;
+
+// 通常の実行では完成図を表示
+window.renderDrawings();
+
 
   textOutput.hidden = false;
 
