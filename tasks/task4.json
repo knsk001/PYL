@@ -1,0 +1,25 @@
+
+{
+  "id": 4,
+  "title": "繰り返し構造",
+  "description": "for文を使って、同じ処理を繰り返してみよう。円の半径を2ずつ増やしながら、5個の円を描こう。",
+  "guide": [
+    {
+      "name": "繰り返し",
+      "code": "for i in range(5):"
+    },
+    {
+      "name": "円を描く",
+      "code": "circle((10, 10), r)"
+    },
+    {
+      "name": "変数の更新",
+      "code": "r = r + 2"
+    },
+    {
+      "name": "色の指定",
+      "code": "color(\"#0080FF\")"
+    }
+  ],
+  "code": "# 課題④ 繰り返し構造\n\ncolor(\"#0080FF\")\n\nr = 2\n\nfor i in range(5):\n    circle((10, 10), r)\n    r = r + 2"
+}
