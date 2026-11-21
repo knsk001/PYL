@@ -143,6 +143,26 @@ window.drawCircle = function(center, radius, fillColor) {
   });
 };
 
+ // 円の輪郭を描く処理
+window.drawCircleLine = function(center, radius, lineColor) {
+  const cx = Number(center[0]);
+  const cy = Number(center[1]);
+  const r = Number(radius);
+
+  if (!Number.isFinite(cx) ||
+      !Number.isFinite(cy) ||
+      !Number.isFinite(r) || r <= 0) {
+    throw new Error("円の中心座標と半径を確認してください");
+  }
+
+  window.addDrawingItem({
+    type: "circle_line",
+    center: [cx, cy],
+    radius: r,
+    color: lineColor
+  });
+};
+
 
  // 2点を結ぶ直線（線分）を描く
 
@@ -184,7 +204,7 @@ window.renderDrawings = function() {
         xs.push(p[0]);
         ys.push(p[1]);
       });
-    } else if (item.type === "circle") {
+    } else if (item.type === "circle" || item.type === "circle_line") {
       xs.push(item.center[0] - item.radius,
               item.center[0] + item.radius);
       ys.push(item.center[1] - item.radius,
