@@ -61,14 +61,17 @@ function stepPlayback() {
   // 表示対象を1個増やす
   playbackIndex++;
 
-  // 表示済みの図形を描画する
-  const allItems = drawingItems;
-  drawingItems = playbackItems.slice(0, playbackIndex);
+　
+ // 表示済みの図形だけを描画する
+const allItems = drawingItems;
+drawingItems = playbackItems.slice(0, playbackIndex);
 
-  window.renderDrawings();
+// 縮尺は全図形を基準に固定する
+window.renderDrawings(playbackItems);
 
-  // 元の図形データに戻す
-  drawingItems = allItems;
+// 元の図形データに戻す
+drawingItems = allItems;
+
 
   // ボタンの状態を更新
   
@@ -280,7 +283,9 @@ window.drawLine = function(start, end, lineColor, width = 2) {
 };
 
  // 保存したすべての図形を共通座標で描画
-window.renderDrawings = function() {
+
+window.renderDrawings = function(scaleItems = drawingItems) {
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if (drawingItems.length === 0) return;
@@ -289,7 +294,7 @@ window.renderDrawings = function() {
   const ys = [];
 
   // 全図形の座標範囲を調べる
-  drawingItems.forEach(item => {
+  scaleItems.forEach(item => {
     if (item.type === "polygon") {
       item.points.forEach(p => {
         xs.push(p[0]);
