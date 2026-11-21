@@ -241,6 +241,20 @@ window.renderDrawings = function() {
       ctx.closePath();
       ctx.fillStyle = item.color;
       ctx.fill();
+     
+    } else if (item.type === "circle_line") {
+      ctx.beginPath();
+      ctx.arc(
+        X(item.center[0]),
+        Y(item.center[1]),
+        item.radius * scale,
+        0,
+        Math.PI * 2
+      );
+      ctx.strokeStyle = item.color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
 
     } else if (item.type === "circle") {
       ctx.beginPath();
@@ -253,6 +267,20 @@ window.renderDrawings = function() {
       );
       ctx.fillStyle = item.color;
       ctx.fill();
+     
+    } else if (item.type === "circle_line") {
+      ctx.beginPath();
+      ctx.arc(
+        X(item.center[0]),
+        Y(item.center[1]),
+        item.radius * scale,
+        0,
+        Math.PI * 2
+      );
+      ctx.strokeStyle = item.color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
 
     } else if (item.type === "line") {
       ctx.beginPath();
