@@ -24,6 +24,23 @@ const autoPlayBtn = document.getElementById('auto-play');
 const stepPlayBtn = document.getElementById('step-play');
 const playResetBtn = document.getElementById('play-reset');
 
+const showGridCheckbox = document.getElementById('show-grid');
+
+showGridCheckbox.addEventListener('change', () => {
+  // 再生途中なら、その時点までの図形を表示する
+  if (playbackIndex > 0 && playbackIndex < playbackItems.length) {
+    const allItems = drawingItems;
+
+    drawingItems = playbackItems.slice(0, playbackIndex);
+    window.renderDrawings(playbackItems);
+
+    drawingItems = allItems;
+  } else {
+    // 通常は現在の図形を再描画する
+    window.renderDrawings();
+  }
+});
+
 
  // 再生機能の管理
 let playbackItems = [];
@@ -326,6 +343,8 @@ window.renderDrawings = function(scaleItems = drawingItems) {
   const X = x => margin + (x - minX) * scale;
   const Y = y => canvas.height - margin - (y - minY) * scale;
 
+  if (showGridCheckbox.checked) {
+
   // 薄い方眼を表示する
   const gridStep = 5;
 
@@ -397,7 +416,7 @@ window.renderDrawings = function(scaleItems = drawingItems) {
       ctx.fillText(String(y), X(0) - 7, Y(y) + 4);
     }
   }
-
+}
   // 登録順に描画する
   drawingItems.forEach(item => {
     if (item.type === "polygon") {
