@@ -112,7 +112,14 @@ print("変更後：", new_iro)
 show_colors(iro, new_iro)
 </textarea>
 
-<section class="panel"><h2>実行結果（図形・表・グラフ・文字）</h2><div id="output" class="output-wrap" aria-label="実行結果"><div id="text-output" class="result-section" hidden></div><div id="table-output" class="result-section" hidden></div><div id="canvas-output" class="result-section"><canvas id="preview" width="600" height="450" aria-label="図形・グラフプレビュー"></canvas></div></div><p class="hint">図形・表・グラフ・文字の表示領域を用意しました。実行機能は次の段階で追加します。</p></section>
+<section class="panel"><h2>実行結果（図形・表・グラフ・文字）</h2><div id="output" class="output-wrap" aria-label="実行結果"><div id="text-output" class="result-section" hidden></div><div id="table-output" class="result-section" hidden></div><div id="canvas-output" class="result-section">
+  
+<label>
+  <input type="checkbox" id="show-grid" checked>
+  座標軸・方眼を表示
+</label>
+
+  <canvas id="preview" width="600" height="450" aria-label="図形・グラフプレビュー"></canvas></div></div><p class="hint">図形・表・グラフ・文字の表示領域を用意しました。実行機能は次の段階で追加します。</p></section>
 </div>
 
 <div class="actions">
