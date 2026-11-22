@@ -326,6 +326,78 @@ window.renderDrawings = function(scaleItems = drawingItems) {
   const X = x => margin + (x - minX) * scale;
   const Y = y => canvas.height - margin - (y - minY) * scale;
 
+  // 薄い方眼を表示する
+  const gridStep = 5;
+
+  ctx.beginPath();
+
+  // 縦線
+  for (
+    let x = Math.ceil(minX / gridStep) * gridStep;
+    x <= maxX;
+    x += gridStep
+  ) {
+    ctx.moveTo(X(x), 0);
+    ctx.lineTo(X(x), canvas.height);
+  }
+
+  // 横線
+  for (
+    let y = Math.ceil(minY / gridStep) * gridStep;
+    y <= maxY;
+    y += gridStep
+  ) {
+    ctx.moveTo(0, Y(y));
+    ctx.lineTo(canvas.width, Y(y));
+  }
+
+  ctx.strokeStyle = "#E6ECF2";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+ 
+  // X軸・Y軸を表示する
+  ctx.beginPath();
+
+  // X軸（y = 0）
+  ctx.moveTo(0, Y(0));
+  ctx.lineTo(canvas.width, Y(0));
+
+  // Y軸（x = 0）
+  ctx.moveTo(X(0), 0);
+  ctx.lineTo(X(0), canvas.height);
+
+  ctx.strokeStyle = "#999999";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+
+  // 座標軸の目盛りを表示する
+  ctx.fillStyle = "#666666";
+  ctx.font = "12px sans-serif";
+
+  // X軸の目盛り
+  ctx.textAlign = "center";
+  for (
+    let x = Math.ceil(minX / 5) * 5;
+    x <= maxX;
+    x += 5
+  ) {
+    ctx.fillText(String(x), X(x), Y(0) + 15);
+  }
+
+  // Y軸の目盛り
+  ctx.textAlign = "right";
+  for (
+    let y = Math.ceil(minY / 5) * 5;
+    y <= maxY;
+    y += 5
+  ) {
+    if (y !== 0) {
+      ctx.fillText(String(y), X(0) - 7, Y(y) + 4);
+    }
+  }
+
   // 登録順に描画する
   drawingItems.forEach(item => {
     if (item.type === "polygon") {
