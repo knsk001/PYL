@@ -68,7 +68,15 @@ function resetPlayback() {
   if (currentTask === 4) {
     playbackInfo.hidden = false;
     loopCount.textContent = `0 / ${playbackItems.length}`;
-    radiusValue.textContent = "2";
+    
+    // 最初に描画する円の半径を初期値として表示
+    const firstCircle = playbackItems.find(
+      item => item.type === "circle_line"
+    );
+
+    radiusValue.textContent =
+      firstCircle ? firstCircle.radius : "－";
+;
   } else {
     playbackInfo.hidden = true;
   }
@@ -169,9 +177,11 @@ const ctx = canvas.getContext('2d');
 async function loadTask(taskNumber) {
  
   // 課題を切り替えるときは、変数表示をいったん隠す
-  playbackInfo.hidden = true;
-  loopCount.textContent = "0 / 5";
-  radiusValue.textContent = "2";
+  
+playbackInfo.hidden = true;
+loopCount.textContent = "0 / 0";
+radiusValue.textContent = "－";
+
 
   try {
     const response = await fetch(
