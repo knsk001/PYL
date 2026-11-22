@@ -26,6 +26,11 @@ const playResetBtn = document.getElementById('play-reset');
 
 const showGridCheckbox = document.getElementById('show-grid');
 
+const playbackInfo = document.getElementById('playback-info');
+const loopCount = document.getElementById('loop-count');
+const radiusValue = document.getElementById('radius-value');
+
+
 showGridCheckbox.addEventListener('change', () => {
   // 再生途中なら、その時点までの図形を表示する
   if (playbackIndex > 0 && playbackIndex < playbackItems.length) {
@@ -59,6 +64,15 @@ function resetPlayback() {
   playbackRunning = false;
   playbackIndex = 0;
 
+  // 繰り返し表示を初期状態に戻す
+  if (currentTask === 4) {
+    playbackInfo.hidden = false;
+    loopCount.textContent = `0 / ${playbackItems.length}`;
+    radiusValue.textContent = "2";
+  } else {
+    playbackInfo.hidden = true;
+  }
+
   // 描画画面を消去する
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -77,6 +91,21 @@ function stepPlayback() {
 
   // 表示対象を1個増やす
   playbackIndex++;
+
+  // 課題④の繰り返し回数と半径を表示
+  if (currentTask === 4) {
+    playbackInfo.hidden = false;
+
+    loopCount.textContent =
+      `${playbackIndex} / ${playbackItems.length}`;
+
+    const currentItem = playbackItems[playbackIndex - 1];
+
+    radiusValue.textContent =
+      currentItem.type === "circle_line"
+        ? currentItem.radius
+        : "－";
+  }
 
 　
  // 表示済みの図形だけを描画する
