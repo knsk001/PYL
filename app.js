@@ -167,6 +167,12 @@ const ctx = canvas.getContext('2d');
 
  // 課題JSONファイルを読み込む
 async function loadTask(taskNumber) {
+ 
+  // 課題を切り替えるときは、変数表示をいったん隠す
+  playbackInfo.hidden = true;
+  loopCount.textContent = "0 / 5";
+  radiusValue.textContent = "2";
+
   try {
     const response = await fetch(
   `tasks/task${taskNumber}.json`,
