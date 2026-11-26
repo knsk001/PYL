@@ -1,6 +1,6 @@
 
 {
-  "id": 3,
+  "id": 4,
   "title": "RGBの値を入れ替えよう（分岐構造）",
 "description": "変数nの値を0～3に変更し、RGBの値がどのように変化するか確認しよう。if文による分岐と、一時変数tmpを使った値の交換を学習します。処理番号2と3のプログラムは自分で考えて追加しよう。",
   "guide": [
@@ -21,5 +21,5 @@
       "code": "r = g"
     }
   ],
-"code": "# 課題③ RGBの値を入れ替えよう\n\niro = \"#FF8000\"\nr = iro[1:3]\ng = iro[3:5]\nb = iro[5:7]\nn=0\n#n = int(input(\"処理番号（0～3）：\"))\n\nif n == 0:\n    new_iro = invert_color(iro)\nelif n == 1:\n    tmp = r\n    r = g\n    g = tmp\n    new_iro = \"#\" + r + g + b\nelse:\n    new_iro = iro\n\nprint(\"元の色：\", iro)\nprint(\"変更後：\", new_iro)\nshow_colors(iro, new_iro)"
+"code": "# 課題④ RGBの値を入れ替えよう\n\niro = \"#FF8000\"\nr = iro[1:3]\ng = iro[3:5]\nb = iro[5:7]\nn=0\n#n = int(input(\"処理番号（0～3）：\"))\n\nif n == 0:\n    new_iro = invert_color(iro)\nelif n == 1:\n    tmp = r\n    r = g\n    g = tmp\n    new_iro = \"#\" + r + g + b\nelse:\n    new_iro = iro\n\nprint(\"元の色：\", iro)\nprint(\"変更後：\", new_iro)\nshow_colors(iro, new_iro)"
 }
