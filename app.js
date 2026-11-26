@@ -772,7 +772,7 @@ runBtn.click();
   localStorage.setItem('pyl_code', editor.value);
 
   // 現在は課題③まで
-  nextBtn.disabled = currentTask >= 4;
+  nextBtn.disabled = currentTask >= 5;
 });
 
 initPython();
