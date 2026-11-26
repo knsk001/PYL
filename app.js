@@ -775,4 +775,18 @@ runBtn.click();
   nextBtn.disabled = currentTask >= 5;
 });
 
-initPython();
+
+async function startApp() {
+  const task = await loadTask(1);
+
+  if (task) {
+    displayTask(task);
+  }
+
+  prevBtn.disabled = true;
+
+  await initPython();
+}
+
+startApp();
+
