@@ -1,6 +1,6 @@
 
 {
-  "id": 1,
+  "id": 2,
   "title": "関数と四則演算",
   "description": "defを使って関数を定義し、四則演算を行ってみよう。引数の値を変更して、計算結果がどのように変わるか確認しよう。",
   "guide": [
@@ -33,5 +33,5 @@
       "code": "tasu(12, 4)"
     }
   ],
-  "code": "# 課題① 関数と四則演算\n\ndef tasu(a, b):\n    return a + b\n\ndef hiku(a, b):\n    return a - b\n\nprint(tasu(12, 4))\nprint(hiku(12, 4))"
+  "code": "# 課題② 関数と四則演算\n\ndef tasu(a, b):\n    return a + b\n\ndef hiku(a, b):\n    return a - b\n\nprint(tasu(12, 4))\nprint(hiku(12, 4))"
 }
