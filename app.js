@@ -207,7 +207,7 @@ radiusValue.textContent = "－";
  // 課題JSONの内容を画面に表示する
 function displayTask(task) {
   document.querySelector('header span').textContent =
-    `課題 ${task.id} / 6`;
+    `課題 ${task.id} / 5`;
 
   const taskSection = document.querySelector('.task');
   taskSection.replaceChildren();
@@ -694,13 +694,11 @@ window.renderDrawings();
 
 // リセット
 document.getElementById('reset').addEventListener('click', async () => {
-  if (currentTask === 1) {
-    editor.value = initialCode;
-  } else {
-    const task = await loadTask(currentTask);
-    if (!task) return;
-    editor.value = task.code;
-  }
+  
+  const task = await loadTask(currentTask);
+  if (!task) return;
+  editor.value = task.code;
+
 
   textOutput.textContent = '';
   textOutput.hidden = true;
