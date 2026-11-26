@@ -65,7 +65,7 @@ function resetPlayback() {
   playbackIndex = 0;
 
   // 繰り返し表示を初期状態に戻す
-  if (currentTask === 4) {
+  if (currentTask === 5) {
     playbackInfo.hidden = false;
     loopCount.textContent = `0 / ${playbackItems.length}`;
     
@@ -101,7 +101,7 @@ function stepPlayback() {
   playbackIndex++;
 
   // 課題④の繰り返し回数と半径を表示
-  if (currentTask === 4) {
+  if (currentTask === 5) {
     playbackInfo.hidden = false;
 
     loopCount.textContent =
