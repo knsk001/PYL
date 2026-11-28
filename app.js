@@ -716,7 +716,10 @@ localStorage.removeItem('pyl_code_' + currentTask);
 
  // 全部消す
 document.getElementById('clear').addEventListener('click', () => {
-  editor.value = '';
+  
+editor.value = '';
+localStorage.setItem('pyl_code_' + currentTask, '');
+
   textOutput.textContent = '';
   textOutput.hidden = true;
 
