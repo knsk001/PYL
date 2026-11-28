@@ -207,8 +207,24 @@ radiusValue.textContent = "－";
 }
 
  // 課題JSONの内容を画面に表示する
+
 function displayTask(task) {
+
+  if (playbackTimer !== null) {
+    clearInterval(playbackTimer);
+    playbackTimer = null;
+  }
+
+  playbackRunning = false;
+  playbackItems = [];
+  playbackIndex = 0;
+
+  autoPlayBtn.disabled = true;
+  stepPlayBtn.disabled = true;
+  playResetBtn.disabled = true;
+
   document.querySelector('header span').textContent =
+
     `課題 ${task.id} / 6`;
 
   const taskSection = document.querySelector('.task');
