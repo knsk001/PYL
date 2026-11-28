@@ -241,7 +241,10 @@ function displayTask(task) {
     taskSection.appendChild(table);
   }
 
-  editor.value = task.code;
+  
+const savedTaskCode = localStorage.getItem('pyl_code_' + task.id);
+editor.value = savedTaskCode !== null ? savedTaskCode : task.code;
+
 
   drawingItems = [];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
