@@ -595,7 +595,8 @@ drawTextJS: window.drawText
     await pyodide.runPythonAsync(`
 
 
-from drawing import drawPolygonJS, drawCircleJS, drawCircleLineJS, drawLineJS
+
+from drawing import drawPolygonJS, drawCircleJS, drawCircleLineJS, drawLineJS, drawTextJS
 
 
 from pyodide.ffi import to_js
