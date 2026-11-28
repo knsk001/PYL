@@ -272,6 +272,16 @@ window.addDrawingItem = function(item) {
 // Pythonから呼び出す図形描画処理
 
 
+// ソート途中の配列と比較・交換の情報を記録する
+window.recordSortFrame = function(values, index, action) {
+  sortFrames.push({
+    values: Array.from(values, Number),
+    index: Number(index),
+    action: String(action)
+  });
+};
+
+
 window.drawText = function(x, y, text) {
   window.addDrawingItem({
     type: "text",
@@ -579,17 +589,15 @@ builtins.input = browser_input
 
     // PythonからJavaScriptの描画機能を呼び出す
     
+
 pyodide.registerJsModule("drawing", {
   drawPolygonJS: window.drawPolygon,
   drawCircleJS: window.drawCircle,
   drawCircleLineJS: window.drawCircleLine,
-drawLineJS: window.drawLine,
-drawTextJS: window.drawText
-
+  drawLineJS: window.drawLine,
+  drawTextJS: window.drawText,
+  recordSortFrameJS: window.recordSortFrame
 });
-
-
-
 
     await pyodide.runPythonAsync(`
 
