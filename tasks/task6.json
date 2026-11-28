@@ -1,1 +1,17 @@
-1
+import random
+
+Hako = [0] * 10
+
+for i in range(10):
+    Hako[i] = random.randint(1, 100)
+
+print("整列前", Hako)
+
+for i in range(9):
+    for j in range(9-i):
+        if Hako[j] > Hako[j+1]:
+            tmp = Hako[j]
+            Hako[j] = Hako[j+1]
+            Hako[j+1] = tmp
+
+print("整列後", Hako)
