@@ -622,14 +622,14 @@ def draw(*points):
     drawPolygonJS(to_js(coordinates), _current_color)
     
 
-
-def bar(values):
+def bar(values, y=0):
     color("#5087CC")
     for i in range(len(values)):
         x = i * 3
         h = values[i] / 5
-        draw((x, 0), (x+2, 0), (x+2, h), (x, h))
-        drawTextJS(x+1, h, str(values[i]))
+        draw((x, y), (x+2, y), (x+2, y+h), (x, y+h))
+        drawTextJS(x+1, y+h, str(values[i]))
+
 
 
 def circle(center, radius):
