@@ -700,9 +700,12 @@ window.renderDrawings();
 // リセット
 document.getElementById('reset').addEventListener('click', async () => {
   
-  const task = await loadTask(currentTask);
-  if (!task) return;
-  editor.value = task.code;
+  
+const task = await loadTask(currentTask);
+if (!task) return;
+editor.value = task.code;
+localStorage.removeItem('pyl_code_' + currentTask);
+
 
 
   textOutput.textContent = '';
