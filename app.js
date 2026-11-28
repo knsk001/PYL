@@ -759,9 +759,15 @@ localStorage.removeItem('pyl_code_' + currentTask);
 
 
  // 全部消す
+
 document.getElementById('clear').addEventListener('click', () => {
-  
-editor.value = '';
+
+  drawingItems = [];
+  playbackItems = [];
+  resetPlayback();
+
+  editor.value = '';
+
 localStorage.setItem('pyl_code_' + currentTask, '');
 
   textOutput.textContent = '';
