@@ -83,9 +83,30 @@ function resetPlayback() {
   playResetBtn.disabled = playbackItems.length === 0;
 }
 
+
 function stepPlayback() {
+
+  // 課題⑥のソート再生
+  if (currentTask === 6 && sortFrames.length > 0) {
+    if (sortFrameIndex >= sortFrames.length) return;
+
+    renderSortFrame(sortFrames[sortFrameIndex]);
+    sortFrameIndex++;
+
+    const finished = sortFrameIndex >= sortFrames.length;
+
+    stepPlayBtn.disabled = finished || playbackRunning;
+    autoPlayBtn.disabled = finished || playbackRunning;
+
+    message.textContent =
+      `ソート過程 ${sortFrameIndex} / ${sortFrames.length}`;
+
+    return;
+  }
+
   // すべて表示済みなら終了
   if (playbackIndex >= playbackItems.length) return;
+
 
   // 次に表示する図形を取得
   const item = playbackItems[playbackIndex];
