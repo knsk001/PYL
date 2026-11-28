@@ -209,7 +209,7 @@ radiusValue.textContent = "－";
  // 課題JSONの内容を画面に表示する
 function displayTask(task) {
   document.querySelector('header span').textContent =
-    `課題 ${task.id} / 5`;
+    `課題 ${task.id} / 6`;
 
   const taskSection = document.querySelector('.task');
   taskSection.replaceChildren();
