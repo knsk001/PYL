@@ -22,7 +22,15 @@ const radiusValue = document.getElementById('radius-value');
 
 
 showGridCheckbox.addEventListener('change', () => {
+
+  // ソート再生中は現在の棒グラフを維持する
+  if (currentTask === 6 && sortFrameIndex > 0 && sortFrames.length > 0) {
+    renderSortFrame(sortFrames[sortFrameIndex - 1]);
+    return;
+  }
+
   // 再生途中なら、その時点までの図形を表示する
+
   if (playbackIndex > 0 && playbackIndex < playbackItems.length) {
     const allItems = drawingItems;
 
