@@ -250,11 +250,16 @@ function displayTask(task) {
     playbackTimer = null;
   }
 
+  
   playbackRunning = false;
   playbackItems = [];
   playbackIndex = 0;
 
+  sortFrames = [];
+  sortFrameIndex = 0;
+
   autoPlayBtn.disabled = true;
+
   stepPlayBtn.disabled = true;
   playResetBtn.disabled = true;
 
