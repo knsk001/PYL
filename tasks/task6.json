@@ -45,5 +45,8 @@
       "code": "Hako[j+1] = tmp"
     }
   ],
-  "code": "import random\nHako = [0] * 10\nfor i in range(0,10):\n    Hako[i] = random.randint(1, 100)\nprint(\"整列前\", Hako)\nbar(Hako, 25)\nfor i in range(0,9):\n    for j in range(0,9-i):\n        if Hako[j] > Hako[j+1]:\n            tmp = Hako[j]\n            Hako[j] = Hako[j+1]\n            Hako[j+1] = tmp\nprint(\"整列後\", Hako)\nbar(Hako, 0, \"整列後\")
+  
+  "code": "import random\nHako = [0] * 10\nfor i in range(0,10):\n    Hako[i] = random.randint(1, 100)\nprint(\"整列前\", Hako)\nbar(Hako, 25, \"整列前\")\nfor i in range(0,9):\n    for j in range(0,9-i):\n        if Hako[j] > Hako[j+1]:\n            tmp = Hako[j]\n            Hako[j] = Hako[j+1]\n            Hako[j+1] = tmp\nprint(\"整列後\", Hako)\nbar(Hako, 0, \"整列後\")"
+}
+
 }
