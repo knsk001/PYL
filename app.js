@@ -835,11 +835,13 @@ nextBtn.addEventListener('click', async () => {
   currentTask = nextNumber;
  prevBtn.disabled = currentTask <= 1;
 // 新しい課題のサンプルを自動実行
-runBtn.click();
 
-  // 現在は課題③まで
+  runBtn.click();
+
+  // 課題⑥で次の課題ボタンを無効にする
   nextBtn.disabled = currentTask >= 6;
 });
+
 
 
 async function startApp() {
