@@ -42,6 +42,9 @@ let playbackItems = [];
 let playbackIndex = 0;
 let playbackTimer = null;
 let playbackRunning = false;
+// ソート過程の管理
+let sortFrames = [];
+let sortFrameIndex = 0;
 
 
 function resetPlayback() {
