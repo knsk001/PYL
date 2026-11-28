@@ -7,10 +7,14 @@ const initialCode = editor.value;
 const savedCode = localStorage.getItem('pyl_code');
 
 // 以前保存したコードより、課題①のサンプルを優先する
-// 既存の保存データは削除しない
-if (savedCode !== null) {
-  console.log("保存済みコードがあります");
-}
+const editor = document.getElementById('code');
+const initialCode = editor.value;
+
+// 入力するたびに保存
+
+editor.addEventListener('input', () => {
+  localStorage.setItem('pyl_code_' + currentTask, editor.value);
+});
 
 
 // 入力するたびに保存
