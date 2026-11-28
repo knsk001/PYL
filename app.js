@@ -603,7 +603,9 @@ pyodide.registerJsModule("drawing", {
 
 
 
-from drawing import drawPolygonJS, drawCircleJS, drawCircleLineJS, drawLineJS, drawTextJS
+
+from drawing import drawPolygonJS, drawCircleJS, drawCircleLineJS, drawLineJS, drawTextJS, recordSortFrameJS
+
 
 
 from pyodide.ffi import to_js
