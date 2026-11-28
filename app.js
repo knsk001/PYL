@@ -496,12 +496,18 @@ window.renderDrawings = function(scaleItems = drawingItems) {
   // 登録順に描画する
 
 drawingItems.forEach(item => {
+    
     if (item.type === "text") {
+      ctx.save();
+
       ctx.fillStyle = "#333333";
       ctx.font = "14px sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "bottom";
       ctx.fillText(item.text, X(item.x), Y(item.y) - 4);
+
+      ctx.restore();
+
 
     } else if (item.type === "polygon") {
 
