@@ -647,6 +647,11 @@ def bar(values, y=0, title=""):
     if title:
         drawTextJS((len(values)*3-1)/2, y-2, title)
 
+
+def sort_step(values, index=-1, action="compare"):
+    recordSortFrameJS(to_js(list(values)), index, action)
+
+
 def circle(center, radius):
     drawCircleJS(to_js(list(center)), radius, _current_color)
 
