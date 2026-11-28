@@ -317,13 +317,31 @@ window.addDrawingItem = function(item) {
 
 
 // ソート途中の配列と比較・交換の情報を記録する
+
 window.recordSortFrame = function(values, index, action) {
+  const previous = sortFrames[sortFrames.length - 1];
+  let fixed = previous ? [...previous.fixed] : [];
+
+  if (action === "start") {
+    fixed = [];
+  }
+
+  if (action === "fixed") {
+    fixed.push(Number(index));
+  }
+
+  if (action === "end") {
+    fixed = Array.from(values, (_, i) => i);
+  }
+
   sortFrames.push({
     values: Array.from(values, Number),
     index: Number(index),
-    action: String(action)
+    action: String(action),
+    fixed: fixed
   });
 };
+
 
 
 window.drawText = function(x, y, text) {
