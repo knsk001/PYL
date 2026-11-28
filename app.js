@@ -722,6 +722,9 @@ try {
   // 今回の実行で描く図形だけを記録
   drawingItems = [];
 
+  // ソート過程の記録を初期化
+  sortFrames = [];
+  sortFrameIndex = 0;
   
 await pyodide.runPythonAsync('_current_color = "#000000"');
 
