@@ -559,6 +559,47 @@ drawingItems.forEach(item => {
 };
 
 
+// ソート途中の棒グラフを描画する
+function renderSortFrame(frame) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const values = frame.values;
+  const margin = 30;
+  const baseY = canvas.height - 60;
+  const slot = (canvas.width - margin * 2) / values.length;
+  const barWidth = slot * 0.7;
+  const scale = (canvas.height - 120) / 100;
+
+  values.forEach((value, i) => {
+    const x = margin + i * slot + (slot - barWidth) / 2;
+    const h = value * scale;
+
+    // 通常の棒は青色
+    ctx.fillStyle = "#5087CC";
+
+    // 比較・交換する棒の色を変更
+    if (i === frame.index || i === frame.index + 1) {
+      if (frame.action === "compare") {
+        ctx.fillStyle = "#F4C542";
+      } else if (frame.action === "swap") {
+        ctx.fillStyle = "#E85D5D";
+      }
+    }
+
+    ctx.fillRect(x, baseY - h, barWidth, h);
+
+    // 棒の上に数値を表示
+    ctx.save();
+    ctx.fillStyle = "#333333";
+    ctx.font = "14px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(value, x + barWidth / 2, baseY - h - 4);
+    ctx.restore();
+  });
+}
+
+
 
 let pyodide = null;
 
