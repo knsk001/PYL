@@ -265,6 +265,16 @@ window.addDrawingItem = function(item) {
 // Pythonから呼び出す図形描画処理
 
 
+window.drawText = function(x, y, text) {
+  window.addDrawingItem({
+    type: "text",
+    x: Number(x),
+    y: Number(y),
+    text: String(text)
+  });
+};
+
+
 window.drawPolygon = function(points, fillColor) {
   // Pythonから渡された座標を通常の配列に変換
   const coordinates = Array.from(
