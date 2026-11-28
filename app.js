@@ -836,9 +836,6 @@ nextBtn.addEventListener('click', async () => {
  prevBtn.disabled = currentTask <= 1;
 // 新しい課題のサンプルを自動実行
 runBtn.click();
- 
-  // 編集中のコードを保存
-  localStorage.setItem('pyl_code', editor.value);
 
   // 現在は課題③まで
   nextBtn.disabled = currentTask >= 6;
