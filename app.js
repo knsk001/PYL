@@ -622,7 +622,8 @@ def draw(*points):
     drawPolygonJS(to_js(coordinates), _current_color)
     
 
-def bar(values, y=0):
+
+def bar(values, y=0, title=""):
     color("#5087CC")
     for i in range(len(values)):
         x = i * 3
@@ -630,7 +631,8 @@ def bar(values, y=0):
         draw((x, y), (x+2, y), (x+2, y+h), (x, y+h))
         drawTextJS(x+1, y+h, str(values[i]))
 
-
+    if title:
+        drawTextJS((len(values)*3-1)/2, y-2, title)
 
 def circle(center, radius):
     drawCircleJS(to_js(list(center)), radius, _current_color)
