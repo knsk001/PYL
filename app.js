@@ -156,10 +156,16 @@ stepPlayBtn.addEventListener('click', () => {
   stepPlayback();
 });
 
-
 autoPlayBtn.addEventListener('click', () => {
   if (playbackRunning) return;
-  if (playbackIndex >= playbackItems.length) return;
+
+  const isSort = currentTask === 6 && sortFrames.length > 0;
+
+  const isFinished = () => isSort
+    ? sortFrameIndex >= sortFrames.length
+    : playbackIndex >= playbackItems.length;
+
+  if (isFinished()) return;
 
   playbackRunning = true;
   autoPlayBtn.disabled = true;
@@ -168,13 +174,14 @@ autoPlayBtn.addEventListener('click', () => {
   playbackTimer = setInterval(() => {
     stepPlayback();
 
-    if (playbackIndex >= playbackItems.length) {
+    if (isFinished()) {
       clearInterval(playbackTimer);
       playbackTimer = null;
       playbackRunning = false;
     }
-  }, 1000);
+  }, isSort ? 500 : 1000);
 });
+
 
 playResetBtn.addEventListener('click', () => {
   resetPlayback();
