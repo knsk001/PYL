@@ -54,10 +54,26 @@ function resetPlayback() {
     playbackTimer = null;
   }
 
+  
   playbackRunning = false;
   playbackIndex = 0;
 
+  // ソート再生を初期状態に戻す
+  sortFrameIndex = 0;
+
+  if (currentTask === 6 && sortFrames.length > 0) {
+    renderSortFrame(sortFrames[0]);
+    sortFrameIndex = 1;
+
+    autoPlayBtn.disabled = sortFrames.length <= 1;
+    stepPlayBtn.disabled = sortFrames.length <= 1;
+    playResetBtn.disabled = false;
+
+    return;
+  }
+
   // 繰り返し表示を初期状態に戻す
+
   if (currentTask === 5) {
     playbackInfo.hidden = false;
     loopCount.textContent = `0 / ${playbackItems.length}`;
