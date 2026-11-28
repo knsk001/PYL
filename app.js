@@ -2,29 +2,13 @@
 const editor = document.getElementById('code');
 const initialCode = editor.value;
 
- // 入力したPythonコードをブラウザに自動保存
-
-const savedCode = localStorage.getItem('pyl_code');
-
-// 以前保存したコードより、課題①のサンプルを優先する
-const editor = document.getElementById('code');
-const initialCode = editor.value;
-
-// 入力するたびに保存
-
+// 入力するたびに課題ごとのコードを保存
 editor.addEventListener('input', () => {
   localStorage.setItem('pyl_code_' + currentTask, editor.value);
 });
-
-
-// 入力するたびに保存
-
-editor.addEventListener('input', () => {
-  localStorage.setItem('pyl_code_' + currentTask, editor.value);
-});
-
 
 const runBtn = document.getElementById('run');
+
 
 const autoPlayBtn = document.getElementById('auto-play');
 const stepPlayBtn = document.getElementById('step-play');
