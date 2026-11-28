@@ -636,8 +636,15 @@ function renderSortFrame(frame) {
     const x = margin + i * slot + (slot - barWidth) / 2;
     const h = value * scale;
 
+    
     // 通常の棒は青色
     ctx.fillStyle = "#5087CC";
+
+    // 整列が確定した棒は緑色
+    if (frame.fixed.includes(i)) {
+      ctx.fillStyle = "#55AD70";
+    }
+
 
     // 比較・交換する棒の色を変更
     if (i === frame.index || i === frame.index + 1) {
