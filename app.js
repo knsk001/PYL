@@ -584,7 +584,9 @@ pyodide.registerJsModule("drawing", {
   drawPolygonJS: window.drawPolygon,
   drawCircleJS: window.drawCircle,
   drawCircleLineJS: window.drawCircleLine,
-  drawLineJS: window.drawLine
+drawLineJS: window.drawLine,
+drawTextJS: window.drawText
+
 });
 
 
