@@ -802,7 +802,6 @@ prevBtn.addEventListener('click', async () => {
   prevBtn.disabled = currentTask <= 1;
   nextBtn.disabled = false;
 
-  localStorage.setItem('pyl_code', editor.value);
   runBtn.click();
 });
 // 次の課題へ進む
