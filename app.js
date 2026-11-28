@@ -14,9 +14,11 @@ if (savedCode !== null) {
 
 
 // 入力するたびに保存
+
 editor.addEventListener('input', () => {
-  localStorage.setItem('pyl_code', editor.value);
+  localStorage.setItem('pyl_code_' + currentTask, editor.value);
 });
+
 
 const runBtn = document.getElementById('run');
 
