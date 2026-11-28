@@ -13,8 +13,12 @@
       "code": "random.randint(1, 100)"
     },
     {
-      "name": "繰り返し",
-      "code": "for i in range(9):"
+      "name": "外側の繰り返し",
+      "code": "for i in range(0,9):"
+    },
+    {
+      "name": "内側の繰り返し",
+      "code": "for j in range(0,9-i):"
     },
     {
       "name": "隣り合う値の比較",
@@ -33,5 +37,5 @@
       "code": "Hako[j+1] = tmp"
     }
   ],
-  "code": "import random\nHako = [0] * 10\nfor i in range(10):\n    Hako[i] = random.randint(1, 100)\nprint(\"整列前\", Hako)\nfor i in range(9):\n    for j in range(9-i):\n        if Hako[j] > Hako[j+1]:\n            tmp = Hako[j]\n            Hako[j] = Hako[j+1]\n            Hako[j+1] = tmp\nprint(\"整列後\", Hako)"
+  "code": "import random\nHako = [0] * 10\nfor i in range(0,10):\n    Hako[i] = random.randint(1, 100)\nprint(\"整列前\", Hako)\nfor i in range(0,9):\n    for j in range(0,9-i):\n        if Hako[j] > Hako[j+1]:\n            tmp = Hako[j]\n            Hako[j] = Hako[j+1]\n            Hako[j+1] = tmp\nprint(\"整列後\", Hako)"
 }
