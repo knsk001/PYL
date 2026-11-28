@@ -478,8 +478,17 @@ window.renderDrawings = function(scaleItems = drawingItems) {
   }
 }
   // 登録順に描画する
-  drawingItems.forEach(item => {
-    if (item.type === "polygon") {
+
+drawingItems.forEach(item => {
+    if (item.type === "text") {
+      ctx.fillStyle = "#333333";
+      ctx.font = "14px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "bottom";
+      ctx.fillText(item.text, X(item.x), Y(item.y) - 4);
+
+    } else if (item.type === "polygon") {
+
       ctx.beginPath();
       item.points.forEach((p, i) => {
         if (i === 0) ctx.moveTo(X(p[0]), Y(p[1]));
