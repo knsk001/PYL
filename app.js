@@ -659,8 +659,17 @@ if (editor.value.trim() !== '') {
 
 
 // Pythonコードの実行
+
 runBtn.addEventListener('click', async () => {
   if (!pyodide) return;
+
+  if (playbackTimer !== null) {
+    clearInterval(playbackTimer);
+    playbackTimer = null;
+  }
+
+  playbackRunning = false;
+
  
 
  
